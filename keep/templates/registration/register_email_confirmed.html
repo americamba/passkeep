@@ -1,0 +1,19 @@
+{% extends "adminlte/base.html" %}
+{% load i18n static %}
+
+{% block body_class %}register-page{% endblock %}
+
+{% block body %}
+ <div class="register-box">
+  <div class="register-logo">
+    PassKeep
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">{% trans 'Account Activated' %}</p>
+      {% trans 'Thank you for your confirming your email address. Now you can login your account. Click' %} <a href="{% url 'keep:index' %}">{% trans 'here' %}</a> {% trans 'to enter.' %}
+    </div>    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div><!-- /.register-box -->
+{% endblock %}

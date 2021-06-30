@@ -1,0 +1,97 @@
+{% extends "adminlte/base.html" %}
+{% load i18n static %}
+
+{% block body_class %}register-page{% endblock %}
+
+{% block body %}
+ <div class="register-box">
+  <div class="register-logo">
+    PassKeep
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">{% trans 'Register a new account' %}</p>
+
+      {% if form.errors and not form.non_field_errors %}
+          <p class="alert alert-danger">
+              {% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}
+                  {% trans "Please correct the errors below." %}{% endif %}
+          </p>
+      {% endif %}
+
+      {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+              <p class="alert alert-danger">
+                  {{ error }}
+              </p>
+          {% endfor %}
+      {% endif %}
+
+      <form action="{% url 'keep:register' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="username" placeholder="{% trans 'Username' %}" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="first_name" placeholder="{% trans 'First Name' %}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="last_name" placeholder="{% trans 'Last Name' %}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="email" placeholder="{% trans 'Email' %}" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password1" placeholder="{% trans 'Password' %}" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password2" placeholder="{% trans 'Reenter Password' %}" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+          </div><!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">{% trans 'Register' %}</button>
+          </div><!-- /.col -->
+        </div>
+      </form>
+
+      <a href="{% url 'keep:login' %}" class="text-center">{% trans 'I already have an account' %}</a>
+    </div>    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div><!-- /.register-box -->
+{% endblock %}

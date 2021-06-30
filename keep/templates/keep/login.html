@@ -1,0 +1,9 @@
+{% extends "adminlte/login.html" %}
+
+{% block logo_text %}PassKeep{% endblock %}
+
+
+{% block login_form_links %}
+  <a href="{% url 'keep:register' %}" class="btn btn-primary">Register</a>
+  <a href="{% url 'keep:password_reset' %}" class="btn btn-primary">Reset Password</a>
+{% endblock %}

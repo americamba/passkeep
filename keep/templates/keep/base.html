@@ -1,0 +1,33 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block nav_header %}
+    {% include 'keep/lib/_main_header.html' %}
+{% endblock %}
+
+{% block content_header %}
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{% block page_name %}{{ title }}{% endblock %}</h1>
+          </div>
+          <div class="col-sm-6">
+            {% block breadcrumbs %}
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item active"><a href="{% url 'keep:index' %}">Home</a></li>
+              </ol>
+            {% endblock %}
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+{% endblock %}
+
+{% block nav_sidebar %}
+    {% include 'keep/lib/_main_sidebar.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/passkeep.js' %}"></script>
+{% endblock %}

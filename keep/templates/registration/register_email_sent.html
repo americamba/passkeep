@@ -1,0 +1,19 @@
+{% extends "adminlte/base.html" %}
+{% load i18n static %}
+
+{% block body_class %}register-page{% endblock %}
+
+{% block body %}
+ <div class="register-box">
+  <div class="register-logo">
+    PassKeep
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">{% trans 'Account Created' %}</p>
+      {% trans 'An email has been sent to your inbox. Please check it an click the link to activate your account.' %}
+    </div><!-- /.form-box -->
+  </div><!-- /.card -->
+</div><!-- /.register-box -->
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'keep/base.html' %}
+{% load static %}
+
+{% block styles %}
+{{ super }}
+<link rel="stylesheet" href="{% static 'admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{ title }}</h3>
+      </div>
+      <div class="card-body">
+        <table id="category-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th style="width: 160px;"></th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for category in object_list %}
+            <tr>
+              <td style="width: 160px;">
+                <div class="btn-group">
+                  <a type="button" class="btn btn-primary" href="{% url 'keep:category_add' %}"><i class="fa fa-plus"></i></a>
+                  <a type="button" class="btn btn-primary" href="{% url 'keep:category_update' category.id %}"><i class="fa fa-edit"></i></a>
+                  <a type="button" class="btn btn-danger" href="{% url 'keep:category_delete' category.id %}"><i class="fa fa-eraser"></i></a>
+                </div>
+              </td>
+              <td>{{ category.name }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td><a type="button" class="btn btn-primary" href="{% url 'keep:category_add' %}"><i class="fa fa-plus"></i></a></td>
+              <td>No Categories</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ super }}
+
+<script src="{% static 'admin-lte/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+  $('#category-table').DataTable({
+      "responsive": true,
+      "autoWidth": false,
+  });
+});
+</script>
+
+{% endblock %}

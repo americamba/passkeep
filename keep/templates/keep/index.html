@@ -1,0 +1,78 @@
+{% extends 'keep/base.html' %}
+{% load static %}
+
+{% block styles %}
+{{ super }}
+<link rel="stylesheet" href="{% static 'admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Passwords</h3>
+      </div>
+      <div class="card-body">
+        <table id="pass-table" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th style="width: 160px;"></th>
+              <th>Title</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>URL</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for password in object_list %}
+            <tr>
+              <td style="width: 160px;">
+                <div class="btn-group">
+                  <a type="button" class="btn btn-primary" href="{% url 'keep:add' %}"><i class="fa fa-plus"></i></a>
+                  <a type="button" class="btn btn-primary" href="{% url 'keep:update' password.id %}"><i class="fa fa-edit"></i></a>
+                  <a type="button" class="btn btn-danger" href="{% url 'keep:delete' password.id %}"><i class="fa fa-eraser"></i></a>
+                </div>
+              </td>
+              <td>{{ password.title }}</td>
+              <td>{{ password.username }}</td>
+              <td>{{ password.password }}</td>
+              <td>{% if password.url %}<a href="{{ password.url }}">{{ password.url }}</a> {% endif %}</td>
+              <td>{{ password.notes }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td><a type="button" class="btn btn-primary" href="{% url 'keep:add' %}"><i class="fa fa-plus"></i></a></td>
+              <td colspan="5">No Passwords</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ super }}
+
+<script src="{% static 'admin-lte/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'admin-lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+
+<script>
+$(document).ready(function() {
+  $('#pass-table').DataTable({
+      "responsive": true,
+      "autoWidth": false,
+  });
+});
+</script>
+
+{% endblock %}

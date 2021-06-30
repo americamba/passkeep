@@ -1,0 +1,32 @@
+{% extends 'keep/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+  <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="{% url 'keep:index' %}">Home</a></li>
+    <li class="breadcrumb-item active">{{ title }}</li>
+  </ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{ title }}</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body" style="height: 100%;">
+        <form method="post">
+          {% csrf_token %}
+          <p>Are you sure you want to delete "{{ object }}"?</p>
+          <a href="{% url 'keep:category' %}" class="btn btn-primary">No</a>
+          <button type="submit" class="btn btn-primary pull-right">Yes</button>
+        </form>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+{% endblock %}
